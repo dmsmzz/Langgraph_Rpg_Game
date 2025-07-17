@@ -1,0 +1,21 @@
+# RPG 게임 필수 라이브러리
+langchain>=0.1.0
+langchain-openai>=0.1.0
+langgraph>=0.0.40
+openai>=1.0.0
+
+# 데이터베이스 (Python 기본 내장)
+# sqlite3 - 별도 설치 불필요
+
+# 유틸리티
+python-dotenv>=1.0.0
+typing-extensions>=4.0.0
+
+# 개발 및 테스트 (선택사항)
+pytest>=7.0.0
+pytest-cov>=4.0.0
+black>=23.0.0
+flake8>=6.0.0
+
+#필요 라이브러리 없을 경우
+#pip install -r requirements.txt
