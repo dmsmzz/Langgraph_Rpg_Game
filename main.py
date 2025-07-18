@@ -218,7 +218,7 @@ def select_save_file():
 
 def handle_inventory_flow(state: PlayerInitState) -> PlayerInitState:
     #인벤토리 플로우 처리
-    print("[DEBUG] 인벤토리 플로우 시작")
+    print("인벤토리 플로우 시작")
     
     game_nodes = GameNodes()
     
@@ -282,7 +282,7 @@ def handle_inventory_flow(state: PlayerInitState) -> PlayerInitState:
             state["next_action"] = "wait_input"
             break
     
-    print("[DEBUG] 인벤토리 플로우 종료")
+    print("인벤토리 플로우 종료")
     return state
 
 
@@ -433,7 +433,7 @@ def run_game(initial_state: PlayerInitState = None):
                     
                     # next_action에 따른 노드 실행
                     next_action = current_state.get("next_action")
-                    print(f"[DEBUG] 다음 액션: {next_action}")
+                    print(f" 다음 액션: {next_action}")
                     
                     if next_action == "story_continue":
                         current_state = game_nodes.story_continue_node(current_state)

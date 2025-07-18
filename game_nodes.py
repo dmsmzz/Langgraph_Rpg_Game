@@ -84,7 +84,7 @@ class GameNodes:
 
             return {
                 **state,
-                "message": state["messages"]+AIMessage(content = creation_msg),
+                "message": state["messages"]+[AIMessage(content = creation_msg)],
                 "next_action": "character_creation"
             }
         
