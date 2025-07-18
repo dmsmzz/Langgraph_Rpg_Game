@@ -363,16 +363,23 @@ class GameNodes:
         # 최근 사용자 입력
         user_messages = [msg for msg in state["messages"] if isinstance(msg, HumanMessage)]
         last_user_input = user_messages[-1].content if user_messages else ""
-        
+    
         # 현재 명성 조회
         current_reputation = self._get_current_reputation(state)
         reputation_response = self.reputation_manager.get_reputation_response(
             current_reputation, "주민들", current_location
         )
-        
+    
         # 파티원 정보
         party_members = story_context.get('party_members', [])
         party_info = f"파티원: {party_members}" if party_members != ["혼자 모험 중"] else "혼자 모험 중"
+
+        # 플레이어 정보 확실히 전달
+        player = state.get("player")
+        if player:
+            player_info = f"{player.name} ({player.race} {player.class_type}, 레벨 {player.level})"
+        else:
+            player_info = "알 수 없는 모험가"
 
         # 주요 목표 추출
         first_ai_message = None
@@ -386,27 +393,34 @@ class GameNodes:
 
         sys_prompt = f"""
         명성 시스템이 적용된 RPG에서 사용자의 행동에 맞춰 스토리를 진행해주세요.
-        
+    
         === 현재 스토리 컨텍스트 ===
-        플레이어: {story_context.get('player_info', '')}
+        플레이어: {player_info}
         현재 위치: {current_location}
         {objective_info}
         {party_info}
-        
+    
         === 명성 정보 ===
         현재 명성: {current_reputation}
         명성 레벨: {reputation_response.level.value}
         주민들의 태도: {reputation_response.tone}
         협조 의지: {reputation_response.willingness_to_help * 100:.0f}%
-        
+    
         사용자의 최근 행동: "{last_user_input}"
-        
+    
         **핵심 원칙:**
-        1. **명성에 따른 NPC 반응** - 명성이 높을수록 호의적, 낮을수록 적대적
-        2. **실질적인 진전** - 사용자 행동에 대한 구체적이고 의미 있는 결과
-        3. **정보는 충분히** - 묻는 것에 대해 유용한 정보를 제공
-        4. **다음 단계 명확히** - 구체적인 선택지나 행동 방향 제시
-        
+        1. **캐릭터는 이미 생성 완료** - 플레이어는 이미 {player_info}로 확정됨
+        2. **명성에 따른 NPC 반응** - 명성이 높을수록 호의적, 낮을수록 적대적
+        3. **실질적인 진전** - 사용자 행동에 대한 구체적이고 의미 있는 결과
+        4. **정보는 충분히** - 묻는 것에 대해 유용한 정보를 제공
+        5. **다음 단계 명확히** - 구체적인 선택지나 행동 방향 제시
+        6. **일관성 유지** - 이전 상황과 자연스럽게 연결되는 스토리
+    
+        **절대 금지 사항:**
+        - 캐릭터 생성 요구하지 마세요 (이미 완료됨)
+        - "종족과 직업을 선택하세요" 같은 말 하지 마세요
+        - 게임 초기화하지 마세요
+    
         **명성별 NPC 반응 가이드:**
         - 영웅급(80+): 극도로 존경, 무료 도움, 특별 정보 제공
         - 매우 호의(60-79): 매우 친근, 할인 혜택, 추가 정보
@@ -416,7 +430,7 @@ class GameNodes:
         - 적대(-21~-40): 불쾌함, 높은 가격, 무례
         - 매우 적대(-41~-60): 두려움, 서비스 거부
         - 원수(-61 이하): 공격적, 도망 또는 싸움
-        
+    
         250-300자 내외로 작성하고 "어떻게 하시겠어요?"로 마무리하세요.
         """
 
@@ -433,7 +447,7 @@ class GameNodes:
             }
 
             return result
-        
+    
         except Exception as e:
             print(f"스토리 진행+명성 영향 처리 오류")
             return {
