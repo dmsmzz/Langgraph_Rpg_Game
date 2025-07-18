@@ -553,7 +553,6 @@ def run_game(initial_state: PlayerInitState = None):
 def main():
     #메인 함수
     print("=== 🎮 명성 시스템 적용 LangGraph RPG ===")
-    print("📍 GitHub 포트폴리오용 모듈화 버전")
     print("⭐ 명성 시스템으로 더욱 몰입감 있는 RPG 경험!")
     print("💾 저장/로드 기능으로 언제든지 게임 중단 가능!")
     print()
