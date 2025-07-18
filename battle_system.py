@@ -46,7 +46,7 @@ class BattleSystem:
 
             if not is_alive:
                 print(f"{name}은 이미 쓰러진 상태, 전투 불참")
-                continu
+                continue
             
             # 전투 계산
             battle_result = self._calculate_character_battle(char_id, name, char_type, main_db)

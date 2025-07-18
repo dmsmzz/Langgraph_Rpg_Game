@@ -84,7 +84,7 @@ class GameNodes:
 
             return {
                 **state,
-                "message": state["messages"]+[AIMessage(content = creation_msg)],
+                "messages": state["messages"]+[AIMessage(content = creation_msg)],
                 "next_action": "character_creation"
             }
         
@@ -107,7 +107,7 @@ class GameNodes:
 
             return {
                 **state,
-                "messages": state["message"] + [AIMessage(content=error_msg)],
+                "messages": state["messages"] + [AIMessage(content=error_msg)],
                 "next_action": "character_creation"
             }
         
@@ -183,7 +183,7 @@ class GameNodes:
         #메인스토리 시작
 
         player = state ["player"]
-        main_db = MainStoryDB
+        main_db = MainStoryDB()
 
         #캐릭터 생성 노드에서 받은 정보 활용
         starting_location = state.get("starting_location", "모험가의 마을")
@@ -245,7 +245,7 @@ class GameNodes:
             "next_action": "wait_input"
         }
     
-    def intent_analysis_node(self, state=PlayerInitState) -> PlayerInitState:
+    def intent_analysis_node(self, state: PlayerInitState) -> PlayerInitState:
         #플레이어 응답 의도 분석
 
         #마지막 사용자 메시지
