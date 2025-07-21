@@ -40,6 +40,85 @@ rpg-game/
 ├── requirements.txt       # 필요한 라이브러리
 └── README.md             # 프로젝트 설명서
 
+## 데이터베이스 ERD
+
+erDiagram
+    main_story_characters {
+        INTEGER id PK
+        TEXT name
+        TEXT type
+        TEXT race
+        TEXT class
+        INTEGER level
+        INTEGER hp
+        INTEGER max_hp
+        INTEGER mp
+        INTEGER max_mp
+        INTEGER strength
+        INTEGER agility
+        INTEGER intelligence
+        TEXT current_location
+        BOOLEAN is_alive
+        BOOLEAN is_in_party
+        INTEGER relationship_level
+        INTEGER reputation
+        INTEGER gold
+        TEXT backstory
+        DATETIME created_at
+        DATETIME updated_at
+    }
+    
+    inventory {
+        INTEGER id PK
+        INTEGER player_id FK
+        TEXT item_name
+        TEXT item_type
+        INTEGER quantity
+        TEXT description
+        INTEGER value
+        DATETIME created_at
+    }
+    
+    story_events {
+        INTEGER id PK
+        INTEGER player_id FK
+        TEXT event_type
+        TEXT event_description
+        TEXT location
+        INTEGER turn_number
+        INTEGER reputation_change
+        INTEGER gold_change
+        DATETIME timestamp
+    }
+    
+    reputation_changes {
+        INTEGER id PK
+        INTEGER player_id FK
+        INTEGER old_reputation
+        INTEGER new_reputation
+        INTEGER change_amount
+        TEXT reason
+        TEXT location
+        DATETIME timestamp
+    }
+    
+    shop_transactions {
+        INTEGER id PK
+        INTEGER player_id FK
+        TEXT item_name
+        INTEGER quantity
+        INTEGER unit_price
+        INTEGER total_price
+        TEXT transaction_type
+        TEXT location
+        DATETIME timestamp
+    }
+    
+    main_story_characters ||--o{ inventory : "has"
+    main_story_characters ||--o{ story_events : "experiences"
+    main_story_characters ||--o{ reputation_changes : "reputation_history"
+    main_story_characters ||--o{ shop_transactions : "transactions"
+
 ## 🚀 설치 및 실행
 
 ### 1. 환경 설정
