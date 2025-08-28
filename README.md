@@ -220,3 +220,45 @@ python main.py
 ```bash
 # 개발용 의존성 설치
 pip install -r requirements.txt
+1.도커용
+### 실행 방법
+# 프로젝트 클론 및 이동
+git clone https://github.com/dmsmzz/Langgraph_Rpg_Game.git
+cd Langgraph_Rpg_Game
+
+# API 키 설정
+cp .env.example .env
+# .env 파일을 편집하여 실제 OpenAI API 키 입력
+
+# Docker 빌드 및 실행
+docker compose up --build -d
+
+# 게임 시작
+docker compose exec rpg-game python main.py
+
+# 게임 종료 후 정리
+docker compose down
+
+2.docker가 안될 경우
+# 프로젝트 클론 및 이동
+git clone https://github.com/dmsmzz/Langgraph_Rpg_Game.git
+cd Langgraph_Rpg_Game
+
+# 가상환경 생성
+python -m venv venv
+
+# 가상환경 활성화
+# Windows:
+venv\Scripts\activate
+# Linux/Mac:
+source venv/bin/activate
+
+# 의존성 설치
+pip install -r requirements.txt
+
+# API 키 설정
+cp .env.example .env
+# .env 파일을 편집하여 실제 OpenAI API 키 입력
+
+# 게임 실행
+python main.py
