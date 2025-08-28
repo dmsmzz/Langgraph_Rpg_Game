@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  rpg-game:
+    build: .
+    container_name: langgraph-rpg
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+    volumes:
+      - ./data:/app/data
+    stdin_open: true
+    tty: true
+    restart: unless-stopped

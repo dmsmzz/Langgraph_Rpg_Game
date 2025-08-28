@@ -1,0 +1,39 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*.so
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Virtual environment
+venv/
+ENV/
+env/
+
+# Environment variables
+.env
+*.env
+
+# VSCode settings
+.vscode/
+
+# macOS system files
+.DS_Store
+
+# Logs
+*.log
+
+# SQLite DB or local state
+*.sqlite3
+*.db
+*.pkl
+
+# Model checkpoints
+*.pt
+*.h5
+*.ckpt
+
+# Ignore secrets or API keys
+apikey.json
+demo.py
