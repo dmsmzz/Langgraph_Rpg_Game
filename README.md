@@ -1,7 +1,9 @@
 # 🎮 명성 시스템 적용 LangGraph RPG
 
 > LangGraph와 LangChain을 활용한 명성 시스템 기반 텍스트 RPG 게임
+> 
 https://orchid-metal-958.notion.site/Langgraph-RPG-23720dcb08c580b7bc81f0be474c8aa1?pvs=74
+
 > 설명사이트
 ## 🌟 주요 특징
 
